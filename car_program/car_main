@@ -4,7 +4,7 @@ class Car:
         self.__make = make
         self.__speed = 0
         
-    def acceleration(self):
+    def accelerate(self):
             self.__speed += 5
             
             
@@ -16,4 +16,15 @@ class Car:
     def get_speed(self):
             return self.__speed
     
-    pass
+def main():
+        my_car = Car(2025, "AE86")
+            
+        for i in range(5):
+                my_car.accelerate()
+                
+        for i in range(5):
+                my_car.brake()
+
+if __name__ == "__main__":
+        main()
+                    
