@@ -18,13 +18,14 @@ class Car:
     
 def main():
         my_car = Car(2025, "AE86")
-            
+        print("Starting the AE86...\n") 
+
         for i in range(5):
                 my_car.accelerate()
-                
+        print("Accelerating... Current Speed:", my_car.get_speed())        
         for i in range(5):
                 my_car.brake()
-
+        print("Braking... Current Speed:", my_car.get_speed())
 if __name__ == "__main__":
         main()
                     
