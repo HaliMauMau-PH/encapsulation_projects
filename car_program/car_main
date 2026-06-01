@@ -1,31 +1,59 @@
+import time
 class Car:
-    def __init__(self, year_model, make):
-        self.__year_model = year_model
-        self.__make = make
-        self.__speed = 0
-        
-    def accelerate(self):
-            self.__speed += 5
-            
-            
-    def brake(self):
-            self.__speed -= 5
-            if self.__speed < 0:
+        def __init__(self, year_model, make):
+                self.__year_model = year_model
+                self.__make = make
                 self.__speed = 0
+        
+        def accelerate(self):
+                self.__speed += 5
+            
+            
+        def brake(self):
+                self.__speed -= 5
+                if self.__speed < 0:
+                        self.__speed = 0
                 
-    def get_speed(self):
+        def get_speed(self):
             return self.__speed
     
+        def get_gear(self):
+                if self.__speed == 0:
+                        return "N"
+                elif self.__speed <= 10:
+                        return "1st"
+                elif self.__speed <= 25:
+                        return "2nd"
+                elif self.__speed <= 40:
+                        return "3rd"        
+                elif self.__speed <= 60:
+                        return "4th"
+                else:
+                        return "5th"
+        
+        def display_dashboard(self):
+                filled_blocks = int(self.__speed / 2.5)
+                empty_blocks = 24 - filled_blocks
+                if empty_blocks < 0:
+                        empty_blocks = 0
+                bar = "█" * filled_blocks + "-" * empty_blocks
+                print(f"\r[AE86] [{bar}] {self.__speed:02d} MPH | Gear: {self.get_gear()}   ", end="", flush=True)
 def main():
         my_car = Car(2025, "AE86")
         print("Starting the AE86...\n") 
 
-        for i in range(5):
+        print("--- ACCELERATING ---")
+        for i in range(10):
                 my_car.accelerate()
-        print("Accelerating... Current Speed:", my_car.get_speed())        
-        for i in range(5):
+                my_car.display_dashboard()
+                time.sleep(0.5)       
+                
+        print("\n--- BRAKING ---")
+        for i in range(10):
                 my_car.brake()
-        print("Braking... Current Speed:", my_car.get_speed())
+                my_car.display_dashboard()
+                time.sleep(0.5)
+        print("\n\n DRIFT COMPLETE ")
 if __name__ == "__main__":
         main()
                     
