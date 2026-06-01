@@ -1,3 +1,5 @@
+import time
+
 class Pet:
     def __init__(self):
         self.__name = ""
@@ -20,6 +22,16 @@ class Pet:
     def get_age(self):
         return self.__age
     
+    def speak(self):
+        if self.get_animal_type().lower() == 'dog':
+            return "Woof! Bark!"
+        elif self.get_animal_type().lower() == 'cat':
+            return "Meow! Purrr..."        
+        elif self.get_animal_type().lower() == 'bird':
+            return "Chirp! tweet..."
+        else:
+            return "*alien noises*"
+        
 def main():
         my_pet = Pet()
         
@@ -32,10 +44,22 @@ def main():
         pet_age = int(input("Enter your pet's age: "))
         my_pet.set_age(pet_age)
         
+        
+        print("\n⏳ Processing Biometric Data...")
+        for i in range(1, 4):
+            print("█" * (i * 12) + f" {i*33}%")
+            time.sleep(0.5)
+        print("█" * 40 + " 100%")
+        time.sleep(0.3)
+        
         print("\n--- Pet Details ---")
         print("Name:", my_pet.get_name())
         print("Type:", my_pet.get_animal_type())
         print("Age:", my_pet.get_age())
         
+        print(f"\nLet's hear from {my_pet.get_name()}:")
+        time.sleep(0.5)
+        print(my_pet.speak())
+
 if __name__ == "__main__":
-    main()
+    main()        
