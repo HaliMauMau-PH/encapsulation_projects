@@ -1,3 +1,86 @@
+import time
+
 class Fan:
+    SLOW = 1
+    MEDIUM = 2
+    FAST = 3
     
+    def __init__(self, speed=SLOW, on=False, radius = 5.0, color="blue"):
+        self.__speed = speed
+        self.__on = on
+        self.__radius = radius
+        self.__color = color
+        
+    def set_speed(self, speed):
+        if speed in [Fan.SLOW, Fan.MEDIUM, Fan.FAST]:
+            self.__speed = speed
+            
+    def set_on(self, on):
+        self.__on = on
+        
+    def set_radius(self, radius):
+        self.__radius = radius
+        
+    def set_color(self, color):
+        self.__color = color
+        
+    def get_speed(self):
+        return self.__speed
     
+    def get_on(self):
+        return self.__on
+    
+    def get_radius(self):
+        return self.__radius
+    
+    def get_color(self):
+        return self.__color
+
+    def display_fan(self):
+        if self.get_on():
+            speed_str = ""
+            if self.get_speed() == Fan.SLOW:
+                speed_str = "SLOW (1)"
+                blades = "  (Spinning slowly...)"
+            elif self.get_speed() == Fan.MEDIUM:
+                speed_str = "MEDIUM (2)"
+                blades = " (Spinning steadily...)"
+            elif self.get_speed() == Fan.FAST:
+                speed_str = "FAST (3)"
+                blades = "  (Maximum airflow!)"
+                
+            print(f"Power : [ ON ]")
+            print(f"Speed : {speed_str}")
+            print(f"Status: {blades}")
+        else:
+            print("Power : [ OFF ]")
+            print("Status: [X] (Blades are stationary)")
+        print("-" * 30)
+
+def main():
+    print("=" * 40)
+    print(" SMART FAN SYSTEM ")
+    print("=" * 40)
+
+    # Creating Fan 1 (Max Settings)
+    print("\n Initializing Fan 1...")
+    time.sleep(1)
+    fan1 = Fan()
+    fan1.set_speed(Fan.FAST)
+    fan1.set_radius(10.0)
+    fan1.set_color("yellow")
+    fan1.set_on(True)
+    fan1.display_fan()
+
+    # Creating Fan 2 (Default Settings)
+    print("\n Initializing Fan 2...")
+    time.sleep(1)
+    fan2 = Fan()
+    fan2.set_speed(Fan.MEDIUM)
+    fan2.set_radius(5.0)
+    fan2.set_color("blue")
+    fan2.set_on(False)
+    fan2.display_fan()
+
+if __name__ == "__main__":
+    main()        
