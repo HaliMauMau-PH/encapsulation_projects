@@ -62,9 +62,8 @@ def main():
     print(" SMART FAN SYSTEM ")
     print("=" * 40)
 
-    # Creating Fan 1 (Max Settings)
     print("\n Initializing Fan 1...")
-    time.sleep(1)
+    time.sleep(2)
     fan1 = Fan()
     fan1.set_speed(Fan.FAST)
     fan1.set_radius(10.0)
@@ -72,9 +71,8 @@ def main():
     fan1.set_on(True)
     fan1.display_fan()
 
-    # Creating Fan 2 (Default Settings)
     print("\n Initializing Fan 2...")
-    time.sleep(1)
+    time.sleep(2)
     fan2 = Fan()
     fan2.set_speed(Fan.MEDIUM)
     fan2.set_radius(5.0)
