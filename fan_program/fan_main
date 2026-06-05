@@ -1,5 +1,7 @@
 import time
+import tkinter as tk
 
+#=======================================================================
 class Fan:
     SLOW = 1
     MEDIUM = 2
@@ -15,27 +17,20 @@ class Fan:
         if speed in [Fan.SLOW, Fan.MEDIUM, Fan.FAST]:
             self.__speed = speed
             
-    def set_on(self, on):
-        self.__on = on
+    def set_on(self, on): self.__on = on  
+    def set_radius(self, radius): self.__radius = radius  
+    def set_color(self, color): self.__color = color
         
-    def set_radius(self, radius):
-        self.__radius = radius
-        
-    def set_color(self, color):
-        self.__color = color
-        
-    def get_speed(self):
-        return self.__speed
-    
-    def get_on(self):
-        return self.__on
-    
-    def get_radius(self):
-        return self.__radius
-    
-    def get_color(self):
-        return self.__color
+    def get_speed(self): return self.__speed
+    def get_on(self): return self.__on
+    def get_radius(self): return self.__radius
+    def get_color(self): return self.__color
 
+
+#=======================================================================
+class FanDisplay:
+    def __init__(self, root):
+        
     def display_fan(self):
         if self.get_on():
             speed_str = ""
