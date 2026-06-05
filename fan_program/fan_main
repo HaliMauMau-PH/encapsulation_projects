@@ -67,65 +67,45 @@ class FanDisplay:
             tk.Button(self.root, text="Apply Settings", command=self.apply_settings, bg="#2980b9", fg="white").pack()
             
             
-    def update_screen(self):
-        pass
 
     def toggle_power(self):
-        print("Power button clicked!")
+        current_state = self.my_fan.get_on()
+        self.my_fan.set_on(not current_state)
+        
+        if self.my_fan.get_on():
+            self.btn_power.config(text="POWER OFF", bg="#27ae60")
+        else:
+            self.btn_power.config(text="POWER ON", bg="#e74c3c")
 
     def change_speed(self, speed):
         print(f"Speed button {speed} clicked!")
 
     def apply_settings(self):
-        print("Apply Settings clicked!")
+        self.my_fan.set_radius(self.radius_var.get())
+        self.my_fan.set_color(self.color_var.get())
+        self.update_screen()
         
-        
-    # def display_fan(self):
-    #     if self.get_on():
-    #         speed_str = ""
-    #         if self.get_speed() == Fan.SLOW:
-    #             speed_str = "SLOW (1)"
-    #             blades = "  (Spinning slowly...)"
-    #         elif self.get_speed() == Fan.MEDIUM:
-    #             speed_str = "MEDIUM (2)"
-    #             blades = " (Spinning steadily...)"
-    #         elif self.get_speed() == Fan.FAST:
-    #             speed_str = "FAST (3)"
-    #             blades = "  (Maximum airflow!)"
-                
-    #         print(f"Power : [ ON ]")
-    #         print(f"Speed : {speed_str}")
-    #         print(f"Status: {blades}")
-    #     else:
-    #         print("Power : [ OFF ]")
-    #         print("Status: [X] (Blades are stationary)")
-    #     print("-" * 30)
+    def update_screen(self):
+        color = self.my_fan.get_color().upper()
+        radius = self.my_fan.get_radius()
 
-# def main():
-#     print("=" * 40)
-#     print(" SMART FAN SYSTEM ")
-#     print("=" * 40)
+        display_text = f"=== {color} FAN ({radius}in) ===\n"
 
-#     print("\n Initializing Fan 1...")
-#     time.sleep(2)
-#     fan1 = Fan()
-#     fan1.set_speed(Fan.FAST)
-#     fan1.set_radius(10.0)
-#     fan1.set_color("yellow")
-#     fan1.set_on(True)
-#     fan1.display_fan()
-
-#     print("\n Initializing Fan 2...")
-#     time.sleep(2)
-#     fan2 = Fan()
-#     fan2.set_speed(Fan.MEDIUM)
-#     fan2.set_radius(5.0)
-#     fan2.set_color("blue")
-#     fan2.set_on(False)
-#     fan2.display_fan()
+        if self.my_fan.get_on():
+            speed = self.my_fan.get_speed()
+            if speed == Fan.SLOW:
+                display_text += "Speed : SLOW (1)\nStatus: (+) Spinning slowly..."
+            elif speed == Fan.MEDIUM:
+                display_text += "Speed : MEDIUM (2)\nStatus: (%) Spinning steadily..."
+            elif speed == Fan.FAST:
+                display_text += "Speed : FAST (3)\nStatus: (@) MAXIMUM AIRFLOW!"
+        else:
+            display_text += "Power : [ OFF ]\nStatus: [X] Blades stationary."
+            
+        self.screen.config(text=display_text)
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = FanDisplay(root)
     root.mainloop()
-    main()        
+   
