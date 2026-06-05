@@ -77,8 +77,9 @@ class FanDisplay:
         else:
             self.btn_power.config(text="POWER ON", bg="#e74c3c")
 
-    def change_speed(self, speed):
-        print(f"Speed button {speed} clicked!")
+    def change_speed(self, speed_level):
+        self.my_fan.set_speed(speed_level)
+        self.update_screen()
 
     def apply_settings(self):
         self.my_fan.set_radius(self.radius_var.get())
